@@ -1,3 +1,9 @@
+# LaraURLShortener
+## Installation
+- Use the command "composer install" to donload dependancies.
+- Configure the Mysql connection in the .env file.
+- Use the command : "php artisan migrate".
+
 # Laravel PHP Framework
 
 [![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
