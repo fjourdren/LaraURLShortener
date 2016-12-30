@@ -1,6 +1,6 @@
 # LaraURLShortener
 ## Installation
-- Use the command "composer install" to donload dependancies.
+- Use the command "composer install" to download dependancies.
 - Configure the Mysql connection in the .env file.
 - Use the command : "php artisan migrate".
 
