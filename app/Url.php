@@ -30,8 +30,6 @@ class Url extends Model
         while (true) {
             $this->attributes['id'] = strtolower(str_random(rand(3, 7)));
 
-            echo Url::where('id', '=', $this->attributes['id'])->count();
-
             if (Url::where('id', '=', $this->attributes['id'])->count() == 0) {
                return $this->attributes['id'];
             }
