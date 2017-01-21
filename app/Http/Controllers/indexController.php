@@ -24,7 +24,7 @@ class indexController extends Controller
 		}
 
 
-		$checkUrlInDb = Url::UrlWithTarget($target);
+		$checkUrlInDb = Url::where('target', $target)->first();
 		if($checkUrlInDb!=false) {
 			Session::flash("sucessId", $checkUrlInDb['attributes']['id']);
 			return redirect('/');
@@ -43,7 +43,7 @@ class indexController extends Controller
 
 
 	public function redirect($id) {
-		$url = Url::UrlWithId($id);
+		$url = Url::where('id', $id)->first();
 
 		if(!isset($url)) {
 			Session::flash("error", "This link doesn't exist.");

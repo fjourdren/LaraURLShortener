@@ -37,11 +37,4 @@ class Url extends Model
 
     }
 
-    static function UrlWithId($id) {
-    	return self::where('id', $id)->first();
-    }
-
-    static function UrlWithTarget($target) {
-        return self::where('target', $target)->first();
-    }
 }
