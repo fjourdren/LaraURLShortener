@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use Session;
 use App\Url;
@@ -15,8 +16,11 @@ class indexController extends Controller
 
 
 	public function postUrl() {
-		$target = addslashes($_POST['url']);
-
+		$target = trim(Input::get('url'));
+		$split = str_split($target);
+		if($split[count($split)-1] != "/") {
+			$target .= "/";	
+		}
 
 		if (filter_var($target, FILTER_VALIDATE_URL) === FALSE) {
 			Session::flash("danger", "Your link isn't valid, it need to start with http:// or https://.");
