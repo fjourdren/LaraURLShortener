@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Url extends Model
 {
 
-	protected $table = "Url";
+    protected $table = "Url";
+    public $incrementing = false;
 
     /**
      * The attributes that are mass assignable.
@@ -27,14 +28,16 @@ class Url extends Model
 
     public function generateID() {
 
-        while (true) {
-            $this->attributes['id'] = strtolower(str_random(rand(3, 7)));
+        do {
+            $idGenerated = strtolower(str_random(rand(3, 9)));
+        } while(Url::where('id', '=', $this->id)->count() != 0);
 
-            if (Url::where('id', '=', $this->attributes['id'])->count() == 0) {
-               return $this->attributes['id'];
-            }
-        }
+        $this->id = $idGenerated;
 
+    }
+
+    public function scopeUrl() {
+        return url('/').'/'.$this->id;
     }
 
 }
