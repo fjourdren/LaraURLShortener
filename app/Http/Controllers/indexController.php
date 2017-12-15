@@ -19,25 +19,24 @@ class indexController extends Controller
 
 
 		if (filter_var($target, FILTER_VALIDATE_URL) === FALSE) {
-			Session::flash("error", "Your link isn't valid, it need to start with http:// or https://.");
+			Session::flash("danger", "Your link isn't valid, it need to start with http:// or https://.");
 			return redirect('/');
 		}
 
 
 		$checkUrlInDb = Url::where('target', $target)->first();
-		if($checkUrlInDb!=false) {
-			Session::flash("sucessId", $checkUrlInDb['attributes']['id']);
+		if($checkUrlInDb != false) {
+			Session::flash("sucess", 'Your short link : <a href="'.$checkUrlInDb->Url().'">'.$checkUrlInDb->Url().'</a>');
 			return redirect('/');
 		}
 
 
 		$url = new Url();
-		$id = $url->generateID();
+		$url->generateID();
 		$url->target = $target;
 		$url->save();
 
-
-		Session::flash("sucessId", $id);
+		Session::flash("sucess", 'Your short link : <a href="'.$url->Url().'">'.$url->Url().'</a>');
 		return redirect('/');
 	}
 
@@ -46,7 +45,7 @@ class indexController extends Controller
 		$url = Url::where('id', $id)->first();
 
 		if(!isset($url)) {
-			Session::flash("error", "This link doesn't exist.");
+			Session::flash("danger", "This link doesn't exist.");
 			return redirect('/');
 		}
 
